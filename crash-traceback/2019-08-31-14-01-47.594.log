@@ -1,0 +1,105 @@
+beg=2019-08-31-14-01-47.594 now=2019-08-31-14-06-05.665 loop=31607 ret=0
+beg=2019-08-31-14-01-47.594 now=2019-08-31-14-06-05.673 loop=31608 ret=0
+fatal error: unexpected signal during runtime execution
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x0]
+
+runtime stack:
+runtime.throw(0xee229, 0x2a)
+        /usr/local/go/src/runtime/panic.go:617 +0x54 fp=0x400011ddf0 sp=0x400011ddc0 pc=0x384b4
+runtime: unexpected return pc for runtime.sigpanic called from 0x0
+stack: frame={sp:0x400011ddf0, fp:0x400011de20} stack=[0x400011c000,0x400011e000)
+000000400011dcf0:  000000000000000b  000000400011dd28
+000000400011dd00:  000000000000001f  0000000000000000
+000000400011dd10:  0000000000000000  0000000000000001
+000000400011dd20:  00000000000ec5f5  000000400011dd78
+000000400011dd30:  0000000000038650 <runtime.fatalthrow+64>  0000004000000480
+000000400011dd40:  00000000000384b4 <runtime.throw+84>  000000400011ddc0
+000000400011dd50:  0000000000038f44 <runtime.printunlock+84>  0000000000000001
+000000400011dd60:  000000400011ddc0  00000000000384b4 <runtime.throw+84>
+000000400011dd70:  0000004000000480  000000400011ddb8
+000000400011dd80:  00000000000384b4 <runtime.throw+84>  000000400011dd98
+000000400011dd90:  000000000003849c <runtime.throw+60>  000000000005f2b0 <runtime.fatalthrow.func1+0>
+000000400011dda0:  0000004000000480  00000000000384b4 <runtime.throw+84>
+000000400011ddb0:  000000400011ddc0  000000400011dde8
+000000400011ddc0:  000000000004d4f8 <runtime.sigpanic+1240>  000000400011ddd0
+000000400011ddd0:  000000000005f230 <runtime.throw.func1+0>  00000000000ee229
+000000400011dde0:  000000000000002a  0000000000000000
+000000400011ddf0: <0000000000000000  00000000000ee229
+000000400011de00:  000000000000002a  0000000000000000
+000000400011de10:  0000000000000000  0000000000000000
+000000400011de20: >0000000000000000  0000000000000000
+000000400011de30:  0000000000000000  0000000000000000
+000000400011de40:  0000000000000000  0000000000000000
+000000400011de50:  0000000000000000  0000000000000000
+000000400011de60:  0000000000000000  0000000000000000
+000000400011de70:  0000000000000000  000000400011dec8
+000000400011de80:  0000000000044dfc <runtime.retake+44>  000000400011dee8
+000000400011de90:  0000000000019310 <runtime.unlock+144>  00000000001a5d30
+000000400011dea0:  0000000100000081  000000400011dec8
+000000400011deb0:  0000000000045044 <runtime.retake+628>  0000004000000000
+000000400011dec0:  00000000001fca73  000000400011df08
+000000400011ded0:  00000000000449d4 <runtime.sysmon+404>  000000400011df08
+000000400011dee0:  0000000000044934 <runtime.sysmon+244>  0000000000000000
+000000400011def0:  0000000000004e20  000000000000005f
+000000400011df00:  0000000000000001  000000400011df98
+000000400011df10:  000000000003cc84 <runtime.mstart1+180>  000766e100000014
+runtime.sigpanic()
+        /usr/local/go/src/runtime/signal_unix.go:374 +0x4d8 fp=0x400011de20 sp=0x400011ddf0 pc=0x4d4f8
+
+goroutine 1 [syscall]:
+syscall.Syscall6(0x5f, 0x1, 0xaf87, 0x4000132c88, 0x1000004, 0x0, 0x0, 0xaa4f0, 0x400016c1e0, 0x0)
+        /usr/local/go/src/syscall/asm_linux_arm64.s:35 +0x10 fp=0x4000132c30 sp=0x4000132c20 pc=0x8f8a0
+os.(*Process).blockUntilWaitable(0x4000164180, 0x9eed4, 0x2, 0x2)
+        /usr/local/go/src/os/wait_waitid.go:31 +0x74 fp=0x4000132d20 sp=0x4000132c30 pc=0x9b894
+os.(*Process).wait(0x4000164180, 0xad168, 0xef478, 0xef480)
+        /usr/local/go/src/os/exec_unix.go:22 +0x34 fp=0x4000132da0 sp=0x4000132d20 pc=0x99604
+os.(*Process).Wait(...)
+        /usr/local/go/src/os/exec.go:125
+os/exec.(*Cmd).Wait(0x4000178000, 0x0, 0x0)
+        /usr/local/go/src/os/exec/exec.go:474 +0x4c fp=0x4000132e20 sp=0x4000132da0 pc=0xaad4c
+main.loop(0x1)
+        /root/mypipe/mypipe.go:91 +0x174 fp=0x4000132f00 sp=0x4000132e20 pc=0xad184
+main.main()
+        /root/mypipe/mypipe.go:101 +0x274 fp=0x4000132f80 sp=0x4000132f00 pc=0xad4a4
+runtime.main()
+        /usr/local/go/src/runtime/proc.go:200 +0x23c fp=0x4000132fd0 sp=0x4000132f80 pc=0x39d9c
+runtime.goexit()
+        /usr/local/go/src/runtime/asm_arm64.s:1128 +0x4 fp=0x4000132fd0 sp=0x4000132fd0 pc=0x62e34
+
+goroutine 2 [force gc (idle)]:
+runtime.gopark(0xef780, 0x1a5890, 0x1410, 0x1)
+        /usr/local/go/src/runtime/proc.go:301 +0xf0 fp=0x400010afa0 sp=0x400010af80 pc=0x3a1c0
+runtime.goparkunlock(...)
+        /usr/local/go/src/runtime/proc.go:307
+runtime.forcegchelper()
+        /usr/local/go/src/runtime/proc.go:250 +0xc0 fp=0x400010afd0 sp=0x400010afa0 pc=0x3a050
+runtime.goexit()
+        /usr/local/go/src/runtime/asm_arm64.s:1128 +0x4 fp=0x400010afd0 sp=0x400010afd0 pc=0x62e34
+created by runtime.init.4
+        /usr/local/go/src/runtime/proc.go:239 +0x30
+
+goroutine 3 [GC sweep wait]:
+runtime.gopark(0xef780, 0x1a59c0, 0x140c, 0x1)
+        /usr/local/go/src/runtime/proc.go:301 +0xf0 fp=0x400010b7a0 sp=0x400010b780 pc=0x3a1c0
+runtime.goparkunlock(...)
+        /usr/local/go/src/runtime/proc.go:307
+runtime.bgsweep(0x400012a000)
+        /usr/local/go/src/runtime/mgcsweep.go:70 +0xa8 fp=0x400010b7d0 sp=0x400010b7a0 pc=0x2de18
+runtime.goexit()
+        /usr/local/go/src/runtime/asm_arm64.s:1128 +0x4 fp=0x400010b7d0 sp=0x400010b7d0 pc=0x62e34
+created by runtime.gcenable
+        /usr/local/go/src/runtime/mgc.go:208 +0x54
+
+goroutine 17 [finalizer wait]:
+runtime.gopark(0xef780, 0x1c0e18, 0x140f, 0x1)
+        /usr/local/go/src/runtime/proc.go:301 +0xf0 fp=0x4000106730 sp=0x4000106710 pc=0x3a1c0
+runtime.goparkunlock(...)
+        /usr/local/go/src/runtime/proc.go:307
+runtime.runfinq()
+        /usr/local/go/src/runtime/mfinal.go:175 +0xbc fp=0x40001067d0 sp=0x4000106730 pc=0x24a4c
+runtime.goexit()
+        /usr/local/go/src/runtime/asm_arm64.s:1128 +0x4 fp=0x40001067d0 sp=0x40001067d0 pc=0x62e34
+created by runtime.createfing
+        /usr/local/go/src/runtime/mfinal.go:156 +0x78
+beg=2019-08-31-14-01-47.594 now=2019-08-31-14-06-05.689 loop=31609 ret=134
+
